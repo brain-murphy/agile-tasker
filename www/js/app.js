@@ -4,6 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+
+var nextTaskId = 0;
+
 angular.module('starter', ['ionic', 'starter.controllers'])
 
 .run(function($ionicPlatform) {
@@ -71,3 +74,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/playlists');
 });
+
+function createTask(name, dueDate, workRem, importance, description) {
+    return {
+        id:nextTaskId++,
+        name:name ? name : '',
+        due_date:dueDate ? dueDate : -1,
+        work_rem:workRem ? workRem : -1,
+        importance:importance ? importance : -1,
+        desc:decription ? description : ''
+    };
+}
