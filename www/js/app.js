@@ -4,10 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+var nextTaskId = 0;
 
 angular.module('starter', ['ionic', 'starter.controllers','ionic-timepicker'])
-
-var nextTaskId = 0;
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
