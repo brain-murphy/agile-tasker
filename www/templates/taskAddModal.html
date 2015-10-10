@@ -15,10 +15,15 @@
         <label class="item item-input">
           <span class="input-label">Due Date</span>
           <input type="date" ng-model="taskData.dueDate">
+        
         </label>
-        <label class="item item-input">
-          <span class="input-label">Time (Optional)</span>
-          <input type="ionic-timepicker" ng-model="taskData.dueTime">
+
+          <ionic-timepicker input-obj="timePickerObject">
+          <span class="input-label">(Tap to add time)
+          <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+          </span>
+          </ionic-timepicker>
+
         </label>
         <label>
             <div class="item range">
