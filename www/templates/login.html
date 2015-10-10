@@ -16,12 +16,22 @@
           <span class="input-label">Due Date</span>
           <input type="date" ng-model="taskData.dueDate">
         </label>
-        <label>
-        <label class=item "item-input">
+        <label class="item item-input">
           <span class="input-label">Time (Optional)</span>
-          <input type="ionic-timepicker" ng-model="taskData.dueTime"
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Add Task</button>
+          <input type="ionic-timepicker" ng-model="taskData.dueTime">
+        </label>
+        <label>
+          <span class="item item-input">Importance
+          <input type="range" ng-model="taskData.Importance">
+        </span>
+        </label>
+        <label>
+          <label class=item "item item input">
+            <span class="input-label">Description (Optional)</span>
+            <input type="text" ng-mogel="taskData.description">
+          </label>
+          <label class="item">
+            <button class="button button-block button-positive" type="submit">Add Task</button>
         </label>
       </div>
     </form>
