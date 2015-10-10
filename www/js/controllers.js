@@ -1,5 +1,7 @@
 angular.module('starter.controllers', [])
 
+$rootScope.taskList = [];
+
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -37,7 +39,7 @@ angular.module('starter.controllers', [])
         console.log('adding task', $scope.taskData);
 
         //add task data to task list//
-        tasks.push($scope.taskData);
+        $rootScope.taskList.push($scope.taskData);
 
         //reset data in add task form//
         $scope.taskData = createTask();
