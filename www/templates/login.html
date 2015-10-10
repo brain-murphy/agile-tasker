@@ -1,6 +1,6 @@
 <ion-modal-view>
   <ion-header-bar>
-    <h1 class="title">Login</h1>
+    <h1 class="title">Add Task</h1>
     <div class="buttons">
       <button class="button button-clear" ng-click="closeLogin()">Close</button>
     </div>
@@ -9,15 +9,19 @@
     <form ng-submit="doLogin()">
       <div class="list">
         <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
+          <span class="input-label">Task Name</span>
+          <input type="text" ng-model="taskData.name">
         </label>
         <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
+          <span class="input-label">Due Date</span>
+          <input type="date" ng-model="taskData.dueDate">
         </label>
+        <label>
+        <label class=item "item-input">
+          <span class="input-label">Time (Optional)</span>
+          <input type="ionic-timepicker" ng-model="taskData.dueTime"
         <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
+          <button class="button button-block button-positive" type="submit">Add Task</button>
         </label>
       </div>
     </form>
