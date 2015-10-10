@@ -1,6 +1,16 @@
-angular.module('starter.controllers', [])
+var createTask = function(name, dueDate, workRem, importance, description) {
+    return {
+        id:nextTaskId++,
+        name:name ? name : '',
+        due_date:dueDate ? dueDate : -1,
+        work_rem:workRem ? workRem : -1,
+        importance:importance ? importance : -1,
+        desc:description ? description : ''
+    };
+}
 
-$rootScope.taskList = [];
+
+angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -11,17 +21,11 @@ $rootScope.taskList = [];
     //$scope.$on('$ionicView.enter', function(e) {
     //});
 
-taskList.push(createTask("task1", "oct11", 15, 50, "sample_task"));
+    $scope.taskList = [];
+    $scope.taskList.push(createTask("task1", "oct11", 15, 50, "sample_task"));
+    $scope.taskList.push(createTask("task2", "oct11", 10, 45, "samplasdfasdfasdf"));
+    $scope.taskList.push(createTask("task3", "oct11", 5, 40, "sample_tasasdffdasfsadfasdfk"));
 
-var createTask = function(name, dueDate, workRem, importance, description) {
-    return {
-        id:nextTaskId++,
-        name:name ? name : '',
-        due_date:dueDate ? dueDate : -1,
-        work_rem:workRem ? workRem : -1,
-        importance:importance ? importance : -1,
-        desc:decription ? description : ''
-    };
 
     // Form data for the login modal
     //$scope.taskData = {};
@@ -51,7 +55,7 @@ var createTask = function(name, dueDate, workRem, importance, description) {
         console.log('adding task', $scope.taskData);
 
         //add task data to task list//
-        $rootScope.taskList.push($scope.taskData);
+        $scope.taskList.push($scope.taskData);
 
         //reset data in add task form//
         $scope.taskData = createTask();
