@@ -6,7 +6,7 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <form ng-submit="doLogin()">
+    <form ng-submit="doTaskAdd()">
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Task Name</span>
@@ -15,13 +15,29 @@
         <label class="item item-input">
           <span class="input-label">Due Date</span>
           <input type="date" ng-model="taskData.dueDate">
+        
+        </label>
+
+          <ionic-timepicker input-obj="timePickerObject">
+          <span class="input-label">(Tap to add time)
+          <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+          </span>
+          </ionic-timepicker>
+
         </label>
         <label>
-        <label class=item "item-input">
-          <span class="input-label">Time (Optional)</span>
-          <input type="ionic-timepicker" ng-model="taskData.dueTime"
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Add Task</button>
+            <div class="item range">
+                Importance
+                <input type="range" name="volume" ng-model="taskData.importance">
+            </div>
+        </label>
+        <label>
+          <label class=item "item item input">
+            <span class="input-label">Description (Optional)</span>
+            <input type="text" ng-mogel="taskData.description">
+          </label>
+          <label class="item">
+            <button class="button button-block button-positive" type="submit">Add Task</button>
         </label>
       </div>
     </form>
