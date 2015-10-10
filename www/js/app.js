@@ -6,7 +6,9 @@
 // 'starter.controllers' is found in controllers.js
 var nextTaskId = 0;
 
+
 angular.module('starter', ['ionic', 'starter.controllers','ionic-timepicker'])
+
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

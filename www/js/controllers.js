@@ -5,78 +5,36 @@ var createTask = function(name, dueDate, workRem, importance, description) {
         due_date:dueDate ? dueDate : -1,
         work_rem:workRem ? workRem : -1,
         importance:importance ? importance : -1,
-        desc:description ? description : ''
+        desc:description ? description : '',
+        ranking:getRanking(dueDate, workRem, importance)
     };
 }
+
+
+var getRanking = function(due_date, work_rem, importance){
+    //work remainging alsso needs to be in milliseconds
+    var current_date = (new Date()).getTime();
+    var ranking;
+    if ((work_rem / (current_date - due_date)) >= 0.25){ //if the work remaining is 25% or more of the time left to complete task
+        return ((current_date - due_date) / work_rem) * 100;
+    }
+    else {
+        return ((importance * work_rem) / (due_date - work_rem));
+    }
+};
+
 
 
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
-<<<<<<< HEAD
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+    $scope.updateListOrder = function(){
+        for (var i = 0; i < $scope.taskList.length; i++){
+            $scope.taskList.sort(function(a, b){return b.ranking - a.ranking});
+        }
+    };
 
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  //Hopefully this makes the time picker work!
-  $scope.timePickerObject = {
-  inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
-  step: 15,  //Optional
-  format: 12,  //Optional
-  titleLabel: '12-hour Format',  //Optional
-  setLabel: 'Set',  //Optional
-  // closeLabel: 'Close',  //Optional
-  setButtonType: 'button-positive',  //Optional
-  // closeButtonType: 'button-stable',  //Optional
-  callback: function (val) {    //Mandatory
-    timePickerCallback(val);
-  }
-};
-
-function timePickerCallback(val) {
-  if (typeof (val) === 'undefined') {
-    console.log('Time not selected');
-  } else {
-    var selectedTime = new Date(val * 1000);
-    console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
-  }
-}
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
-=======
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -88,6 +46,8 @@ function timePickerCallback(val) {
     $scope.taskList.push(createTask("task1", "oct11", 15, 50, "sample_task"));
     $scope.taskList.push(createTask("task2", "oct11", 10, 45, "samplasdfasdfasdf"));
     $scope.taskList.push(createTask("task3", "oct11", 5, 40, "sample_tasasdffdasfsadfasdfk"));
+
+    $scope.updateListOrder();
 
 
     // Form data for the login modal
@@ -125,7 +85,6 @@ function timePickerCallback(val) {
 
         $scope.closeTaskAddModal();
     };
->>>>>>> 27364bb07fc4ad60426a71e8e4dc258fbfe4f39e
 })
 
 .controller('PlaylistsCtrl', function($scope) {
