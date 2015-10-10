@@ -6,8 +6,28 @@ var createTask = function(name, dueDate, workRem, importance, description) {
         work_rem:workRem ? workRem : -1,
         importance:importance ? importance : -1,
         desc:description ? description : ''
+        ranking = getRanking(due_date, work_rem, importance)
     };
 }
+
+var updateListOrder(){
+    for (var i = 0; i < taskList.length; i++){
+        taskList.sort(function(a, b){return b.ranking - a.ranking});
+    }
+};
+
+var getRanking = function(due_date, work_rem, importance){
+    //work remainging alsso needs to be in milliseconds
+    var current_date = (new Date()).getTime();
+    var ranking;
+    if ((work_rem / (current_date - due_date)) >= 0.25){ //if the work remaining is 25% or more of the time left to complete task
+        return ((current_date - due_date) / work_rem) * 100);
+    }
+    else {
+        return ((importance * work_rem) / (due_date - work_rem));
+    }
+};
+
 
 
 angular.module('starter.controllers', [])
@@ -25,6 +45,8 @@ angular.module('starter.controllers', [])
     $scope.taskList.push(createTask("task1", "oct11", 15, 50, "sample_task"));
     $scope.taskList.push(createTask("task2", "oct11", 10, 45, "samplasdfasdfasdf"));
     $scope.taskList.push(createTask("task3", "oct11", 5, 40, "sample_tasasdffdasfsadfasdfk"));
+
+    updateListOrder();
 
 
     // Form data for the login modal
