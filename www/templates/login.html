@@ -15,12 +15,13 @@
         <label class="item item-input">
           <span class="input-label">Due Date</span>
           <input type="date" ng-model="taskData.dueDate">
+        
         </label>
-          
+
           <ionic-timepicker input-obj="timePickerObject">
-          <button class="button button-block button-positive overflowShow"> TIME BUTTON
+          <span class="input-label">(Tap to add time)
           <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
-          </button>
+          </span>
           </ionic-timepicker>
 
         </label>
