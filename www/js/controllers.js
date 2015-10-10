@@ -82,15 +82,15 @@ angular.module('starter.controllers', [])
         console.log('adding task', $scope.taskData);
 
         //add task data to task list//
-        $rootScope.forEach(function (ele, i) {
-            if (ele.id === taskData.id) {
+        $rootScope.taskList.forEach(function (ele, i) {
+            if (ele.id === $scope.taskData.id) {
                 taskList.splice(i, 1, $scope.taskData);
                 isNewItem = false;
             }
         });
 
         if (isNewItem) {
-            $rootScope.push($scope.taskData);
+            $rootScope.taskList.push($scope.taskData);
         }
 
         //reset data in add task form//
