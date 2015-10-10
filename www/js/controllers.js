@@ -60,7 +60,7 @@ angular.module('starter.controllers', [])
         //reset data in add task form//
         $scope.taskData = createTask();
 
-        $scope.closeLogin();
+        $scope.closeTaskAddModal();
     };
 })
 
