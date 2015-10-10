@@ -42,6 +42,7 @@ angular.module('starter.controllers', [])
     //$scope.$on('$ionicView.enter', function(e) {
     //});
 
+
     $scope.taskList = [];
     $scope.taskList.push(createTask("task1", "oct11", 15, 50, "sample_task"));
     $scope.taskList.push(createTask("task2", "oct11", 10, 45, "samplasdfasdfasdf"));
