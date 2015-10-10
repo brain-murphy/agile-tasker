@@ -11,6 +11,18 @@ $rootScope.taskList = [];
     //$scope.$on('$ionicView.enter', function(e) {
     //});
 
+taskList.push(createTask("task1", "oct11", 15, 50, "sample_task"));
+
+var createTask = function(name, dueDate, workRem, importance, description) {
+    return {
+        id:nextTaskId++,
+        name:name ? name : '',
+        due_date:dueDate ? dueDate : -1,
+        work_rem:workRem ? workRem : -1,
+        importance:importance ? importance : -1,
+        desc:decription ? description : ''
+    };
+
     // Form data for the login modal
     //$scope.taskData = {};
 
