@@ -72,6 +72,8 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     $rootScope.taskList.push(createTask("task1", new Date().getTime() + 1000 * 60 * 60 * 24, 15, 50, "sample_task"));
     $rootScope.taskList.push(createTask("task2", new Date().getTime() + 1000 * 60 * 60 * 23, 10, 45, "samplasdfasdfasdf"));
     $rootScope.taskList.push(createTask("task3", new Date().getTime() + 1000 * 60 * 60 * 10, 5, 40, "sample_tasasdffdasfsadfasdfk"));
+    $scope.shouldShowReorder = false;
+
 
     updateListOrder($rootScope);
 
