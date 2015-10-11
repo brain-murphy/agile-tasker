@@ -67,6 +67,16 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     $rootScope.taskList.push(createTask("ye old taske", new Date().getTime() + 1000 * 60 * 60 * 10, 5, 40, "sample_tasasdffdasfsadfasdfk"));
 
     // updateListOrder($rootScope);
+    $scope.search_string = '';
+    $scope.searchList = [];
+
+    $scope.doSearch = function(){
+        console.log('test');
+        searchList.length = 0; //reset list with each search
+        for (var i = 0; i < taskList.length; i++){
+            
+        }
+    }
 
     $scope.timePickerObject = {
         inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional

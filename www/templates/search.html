@@ -1,11 +1,13 @@
 <ion-view view-title="Search">
   <ion-content>
-    <div class="circle">
-      <div class="circle__inner">
-        <div class="circle__wrapper">
-          <div class="circle__content">Circle text</div>
-        </div>
-      </div>
-    </div>
+  <form ng-submit="doSearch()">
+  	<label class="item item-input">
+        <span class="input-label">Task Name</span>
+             <input type="text" ng-model="search_string">
+    </label>
+        <label class="item">
+        	<button class="button button-block button-positive" type="submit">Search</button>
+    </label>
+   </form>
   </ion-content>
 </ion-view>
