@@ -1,46 +1,46 @@
 <ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Add Task</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeTaskAddModal()">Close</button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
-    <form ng-submit="doTaskAdd()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Task Name</span>
-          <input type="text" ng-model="taskData.name">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Due Date</span>
-          <input type="date" ng-model="taskData.dueDate">
+    <ion-header-bar>
+        <h1 class="title">Add Task</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeTaskAddModal()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="doTaskAdd()">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Task Name</span>
+                    <input type="text" ng-model="taskData.name">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Due Date</span>
+                    <input type="date" ng-model="taskData.dueDate">
 
-        </label>
+                </label>
 
-        <label>
-        <ionic-timepicker input-obj="timePickerObject">
-        <span class="input-label">Add Time (Optional)</span>
-        <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
-        </ionic-timepicker>
-        </span>
-        </label>
+                <label>
+                    <ionic-timepicker input-obj="timePickerObject">
+                        <span class="input-label">Add Time (Optional)</span>
+                        <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+                    </ionic-timepicker>
+                </span>
+            </label>
 
-        <label>
-            <div class="item range">
-                Importance
-                <input type="range" name="volume" ng-model="taskData.importance">
+            <label>
+                <div class="item range">
+                    Importance
+                    <input type="range" name="volume" ng-model="taskData.importance">
+                </div>
+            </label>
+            <label>
+                <label class=item "item item input">
+                    <span class="input-label">Description (Optional)</span>
+                    <input type="text" ng-mogel="taskData.description">
+                </label>
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">Add Task</button>
+                </label>
             </div>
-        </label>
-        <label>
-          <label class=item "item item input">
-            <span class="input-label">Description (Optional)</span>
-            <input type="text" ng-mogel="taskData.description">
-          </label>
-          <label class="item">
-            <button class="button button-block button-positive" type="submit">Add Task</button>
-        </label>
-      </div>
-    </form>
-  </ion-content>
+        </form>
+    </ion-content>
 </ion-modal-view>

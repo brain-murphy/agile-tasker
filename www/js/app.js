@@ -7,7 +7,7 @@
 var nextTaskId = 0;
 
 
-angular.module('starter', ['ionic', 'starter.controllers','ionic-timepicker'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ionic-timepicker'])
 
 
 .run(function($ionicPlatform) {

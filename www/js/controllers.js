@@ -1,6 +1,8 @@
-var createTask;
+var createTask,
+    updateListOrder,
+    getRanking;
 
- createTask = function (name, dueDate, workRem, importance, description) {
+createTask = function (name, dueDate, workRem, importance, description) {
     return {
         id:nextTaskId++,
         name:name ? name : '',
@@ -8,12 +10,28 @@ var createTask;
         work_rem:workRem ? workRem : -1,
         importance:importance ? importance : -1,
         desc:description ? description : '',
-        ranking:getRanking(dueDate, workRem, importance)
+        isExpanded:false
     };
 };
 
+updateListOrder = function ($rootScope) {
+    console.log('updateListOrder');
+    printTasks($rootScope);
+    console.log('updateListOrder():before', $rootScope.taskList);
+    $rootScope.taskList.sort(function(a, b) {
+        return getRanking(a.due_date, a.work_rem, a.importance) - getRanking(b.due_date, b.work_rem, b.importance);
+    });
+    printTasks($rootScope);
+};
 
-var getRanking = function(due_date, work_rem, importance){
+function printTasks  ($rootScope) {
+    var string = '';
+    $rootScope.taskList.forEach(function (e, i) {
+        string += JSON.stringify(e) + ', ';
+    });
+    console.log('updateListOrder():after', string);
+}
+getRanking = function (due_date, work_rem, importance) {
     //work remainging alsso needs to be in milliseconds
     var current_date = (new Date()).getTime();
     var ranking;
@@ -27,15 +45,9 @@ var getRanking = function(due_date, work_rem, importance){
 
 
 
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ionic-timepicker'])
 
 .controller('AppCtrl', function($scope, $rootScope, $ionicModal, $timeout) {
-
-    $scope.updateListOrder = function(){
-        for (var i = 0; i < $scope.taskList.length; i++){
-            $scope.taskList.sort(function(a, b){return b.ranking - a.ranking});
-        }
-    };
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -49,7 +61,30 @@ angular.module('starter.controllers', [])
     $rootScope.taskList.push(createTask("task2", "oct11", 10, 45, "samplasdfasdfasdf"));
     $rootScope.taskList.push(createTask("task3", "oct11", 5, 40, "sample_tasasdffdasfsadfasdfk"));
 
-    $scope.updateListOrder();
+    updateListOrder($rootScope);
+
+    $scope.timePickerObject = {
+        inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
+        step: 15,  //Optional
+        format: 12,  //Optional
+        titleLabel: '12-hour Format',  //Optional
+        setLabel: 'Set',  //Optional
+        closeLabel: 'Close',  //Optional
+        setButtonType: 'button-positive',  //Optional
+        closeButtonType: 'button-stable',  //Optional
+        callback: function (val) {    //Mandatory
+            timePickerCallback(val);
+        }
+    };
+
+    function timePickerCallback(val) {
+        if (typeof (val) === 'undefined') {
+            console.log('Time not selected');
+        } else {
+            var selectedTime = new Date(val * 1000);
+            console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
+        }
+    }
 
 
     // Form data for the login modal
@@ -105,9 +140,36 @@ angular.module('starter.controllers', [])
 })
 
 .controller('TaskListCtrl', function($scope, $rootScope) {
+
     $scope.moveItem = function(item, fromIndex, toIndex) {
-        $rootScope.taskList.splice(fromIndex, 1);
-        $rootScope.taskList.splice(toIndex, 0, item);
+        console.log('moveItem():before');
+
+        printTasks($rootScope);
+        if (toIndex === 0) {
+            //move to the front of the list. make importance one more than the current max//
+
+            console.log('moveItem() to front:', $rootScope.taskList[fromIndex].importance);
+            $rootScope.taskList[fromIndex].importance = $rootScope.taskList[toIndex].importance + 1;
+        } else if (toIndex === $rootScope.taskList.length - 1) {
+            //move to the last place in the list. make importance one third of the current min//
+
+            console.log('moveItem() to back:', $rootScope.taskList[fromIndex].importance);
+            $rootScope.taskList[fromIndex].importance = $rootScope.taskList[toIndex].importance / 3 * 2;
+        } else {
+            //move in between two elements. make importance halfway between adjacent vals//
+
+            console.log('moveItem() inBetween:');
+            $rootScope.taskList[fromIndex].importance = ($rootScope.taskList[toIndex].importance +
+                    $rootScope.taskList[toIndex + 1].importance) / 2;
+        }
+
+        console.log('moveItem():after');
+        printTasks($rootScope);
+        //sort, now that values are updated//
+        updateListOrder($rootScope);
+    };
+    $scope.onTaskClicked = function (taskId) {
+        $rootScope.taskList[taskId].isExpanded = !$rootScope.taskList[taskId].isExpanded;
     };
 })
 
