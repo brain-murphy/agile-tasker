@@ -1,6 +1,6 @@
 <ion-view view-title="Tasks">
     <ion-content>
-        <ion-list show-reorder="false">
+        <ion-list show-reorder="shouldShowReorder">
             <div ng-repeat="task in taskList">
                 <ion-item
                      class="item-accordion"
@@ -12,9 +12,12 @@
                     <ion-item class="item-accordion"
                         ng-show="task.isExpanded">
                         {{task.desc}}
+                        <div>
+                           {{task.work_rem}}
+                        </div>
                     </ion-item>
-                    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(task, $fromIndex, $toIndex)" />
-
+                    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)">
+                    </ion-reorder-button>
                 </ion-item>
             </div>
         </ion-list>
