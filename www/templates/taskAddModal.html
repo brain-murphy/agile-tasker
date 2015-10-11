@@ -13,9 +13,9 @@
                     <input type="text" ng-model="taskData.name">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label"><strong>Due Date</strong></span>
-                    <input type="date" ng-model="taskData.dueDate">
 
+                    <span class="input-label"><strong>Due Date</strong></span>
+                    <input type="date" ng-model="taskData.due_date">
                 </label>
                 <label class="item item-input">
 
@@ -28,6 +28,10 @@
 
                   </span>
 
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Time to Complete (hours)</span>
+                  <input type="text" ng-model="taskData.work_rem">
                 </label>
 
 
