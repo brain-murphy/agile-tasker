@@ -24,11 +24,21 @@
 
 #gritty{
   display: inline;
+
+}
+#blank{
+  color:white
 }
 
-#grittyOutside{
-  display: inline;
+#reorder{
+
+  position: fixed;
+  top:8%;
+  right:1.5%;
+
 }
+
+.item range{}
 
 .circle {
   position: relative;
