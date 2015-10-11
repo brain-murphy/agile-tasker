@@ -1,20 +1,22 @@
 <ion-view view-title="Tasks">
     <ion-content>
         <ion-list show-reorder="false">
-            <ion-item
-                 class="item-accordion"
-                 ng-repeat="task in taskList"
-                 ng-click="toggleGroup(task)"
-                 ng-class="{active: isGroupShown(task)}">
-                <i class="icon" ng-class="isGroupShown(task) ? 'ion-minus' : 'ion-plus'"></i>
-                {{task.name}}
-                <ion-reorder-button class="ion-navicon" on-reorder="moveItem(task, $fromIndex, $toIndex)" />
-            </ion-item>
-            <ion-item class="item-accordion"
-                ng-repeat="task in taskList"
-                ng-show="isGroupShown(id)">
-                {{task.desc}}
-          </ion-item>
+            <div ng-repeat="task in taskList">
+                <ion-item
+                     class="item-accordion"
+                     ng-click="onTaskClicked(task)"
+                     ng-class="{active: task.isExpanded}">
+                    <i class="icon" ng-class="task.isExpanded ? 'ion-minus' : 'ion-plus'"></i>
+                    {{task.name}}
+
+                    <ion-item class="item-accordion"
+                        ng-show="task.isExpanded">
+                        {{task.desc}}
+                    </ion-item>
+                    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(task, $fromIndex, $toIndex)" />
+
+                </ion-item>
+            </div>
         </ion-list>
     </ion-content>
 </ion-view>
