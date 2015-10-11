@@ -27,6 +27,7 @@ createTask = function (name, dueDate, workRem, importance, description) {
     };
 };
 
+
 updateListOrder = function ($rootScope) {
     $rootScope.taskList.sort(function(a, b) {
         return getRanking(a) - getRanking(b);
@@ -56,6 +57,7 @@ getRanking = function (task) {
 
 
 angular.module('starter.controllers', ['ionic-timepicker'])
+
 
 .controller('AppCtrl', function($scope, $rootScope, $ionicModal, $timeout) {
 
