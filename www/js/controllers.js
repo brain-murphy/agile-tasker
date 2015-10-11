@@ -95,7 +95,7 @@ angular.module('starter.controllers', ['ionic-timepicker'])
 
     $rootScope.taskList = [];
 
-    $rootScope.taskList.push(createTask("Email Alyshia", new Date(new Date().getTime() + 1000 * 60 * 60 * 23), .2, 45, "Tech talk registration for club meeting"));
+    $rootScope.taskList.push(createTask("Email Alyshia", new Date(new Date().getTime() + 1000 * 60 * 60 * 23), 10, 45, "Tech talk registration for club meeting"));
     $rootScope.taskList.push(createTask("Study Physics", new Date(new Date().getTime() + 1000 * 60 * 60 * 24), 15, 50, "Chapters 16, 17, and 18"));
     $rootScope.taskList.push(createTask("Finish Ticket 44220", new Date(new Date().getTime() + 1000 * 60 * 60 * 10), 5, 60, "testing needed on IE8"));
     $rootScope.taskList.push(createTask("Ask about holiday PTO", new Date(new Date().getTime() + 1000 * 60 * 60 * 10), 1, 30, "see if we get that date off"));
@@ -199,7 +199,7 @@ angular.module('starter.controllers', ['ionic-timepicker'])
 
         if (isNewItem) {
             $rootScope.taskList.push($scope.taskData);
-            //updateListOrder();
+            updateListOrder();
         }
 
         //reset data in add task form//

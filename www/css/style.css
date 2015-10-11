@@ -1,5 +1,37 @@
 /* Empty. Add your own CSS if you like */
+.view-slide-in.ng-enter {
+  transition: all 1s ease;
+  -webkit-transition:all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
 
+  opacity:0.5;
+  position:relative;
+  opacity:0;
+  top:10px;
+  left:20px;
+}
+.hide-fade.ng-hide-add, .hide-fade.ng-hide-remove {
+  -webkit-transition:all linear 1s;
+  -moz-transition:all linear 1s;
+  -o-transition:all linear 1s;
+  transition:all linear 1s;
+  display:block!important;
+}
+.hide-fade.ng-hide-add.ng-hide-add-active,
+.hide-fade.ng-hide-remove {
+    max-height: 0;
+  	overflow: hidden;
+
+  	/* Set our transitions up. */
+  	-webkit-transition: max-height 0.8s;
+  	-moz-transition: max-height 0.8s;
+  	transition: max-height 0.8s;
+}
+.hide-fade.ng-hide-add,
+.hide-fade.ng-hide-remove.ng-hide-remove-active {
+  max-height: 200px;
+}
 
 .task-list-item.ng-enter-stagger {
   -webkit-animation-delay:200ms;
@@ -25,7 +57,7 @@
 }
 
 .detailBox{
-  background-color: #D9D9D9;
+  background-color: #D9D9D9 !important;
 
 }
 

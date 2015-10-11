@@ -9,28 +9,28 @@
   <ion-content class="has-header">
         <ion-list show-reorder="shouldShowReorder">
 
-                <ion-item
-                     ng-repeat="task in taskList "
-                     class="item-accordion taskTitle"
-                     item="task"
-                     ng-click="onTaskClicked(task)"
-                     ng-class="{active: task.isExpanded}">
-                    <i class="icon" ng-class="task.isExpanded ? 'ion-minus' : 'ion-plus'"></i>
+            <ion-item ng-repeat="task in taskList"
+              item="task" ng-class="{active: task.isExpanded}">
+
+                    <i class="icon" ng-class="task.isExpanded ? 'ion-minus detailBox' : 'ion-plus'"
+                    ng-click='onTaskClicked(task)'></i>
                     {{task.name}}
 
-                    <ion-item class="item-accordion detailBox"
+
+                     <div ng-class="task.isExpanded ? 'detailBox item-accordion hide-fade' : 'item-accordion hide-fade'"
                         ng-show="task.isExpanded">
-                        <label class="input-label detailBox taskDescript"><strong>Description:</strong>
-                            <div class="detailBox">
+                        <label ng-class="task.isExpanded ? 'input-label detailBox taskDescript' : 'input-label taskDescript'">
+                            <strong>Description:</strong>
+                            <div ng-class="task.isExpanded ? 'detailBox' : ''">
                             {{task.desc}}
                             </div>
                         </label>
-                        <div class="detailBox">
+                        <div ng-class="task.isExpanded ? 'detailBox' : ''">
                             <label class="input-label"><strong>Work Remaining:</strong>
                                 {{task.work_rem}} hours
                             </label>
                         </div>
-                    </ion-item>
+                    </div>
                     <ion-reorder-button class="ion-navicon" on-reorder="moveItem(task, $fromIndex, $toIndex)">
                     </ion-reorder-button>
                 </ion-item>
