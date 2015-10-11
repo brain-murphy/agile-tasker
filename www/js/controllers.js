@@ -72,9 +72,11 @@ angular.module('starter.controllers', ['ionic-timepicker'])
 
     $scope.doSearch = function(){
         console.log('test');
-        searchList.length = 0; //reset list with each search
-        for (var i = 0; i < taskList.length; i++){
-            
+        $scope.searchList.length = 0; //reset list with each search
+        for (var i = 0; i < $rootScope.taskList.length; i++){
+            if ($rootScope.taskList[i].name.indexOf($scope.search_string) <= 0){
+                $scope.searchList.push($rootScope.taskList[i]);
+            }
         }
     }
 
@@ -197,5 +199,5 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     };
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('PlaylistCtrl', function($scope, $stateParms) {
 });
