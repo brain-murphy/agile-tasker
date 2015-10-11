@@ -30,6 +30,14 @@
   color:white
 }
 
+#reorder{
+
+  position: fixed;
+  top:8%;
+  right:1.5%;
+
+}
+
 .item range{}
 
 .circle {
