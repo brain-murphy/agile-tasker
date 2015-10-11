@@ -24,11 +24,13 @@
 
 #gritty{
   display: inline;
+
+}
+#blank{
+  color:white
 }
 
-#grittyOutside{
-  display: inline;
-}
+.item range{}
 
 .circle {
   position: relative;
