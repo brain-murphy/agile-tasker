@@ -1,12 +1,13 @@
 /* Empty. Add your own CSS if you like */
 
+
 .task-list-item.ng-enter-stagger {
   -webkit-animation-delay:200ms;
   animation-delay:200ms;
 
   /* override to make sure it's not inherited from other styles */
-  -webkit-animation-duration:0;
-  animation-duration:0;
+  -webkit-animation-duration:1ms;
+  animation-duration:1ms;
 }
 .item-accordion {
   line-height: 38px;
@@ -24,14 +25,21 @@
 }
 
 .detailBox{
-  background-color: #D9D9D9
+  background-color: #D9D9D9;
+
 }
 
 .taskTitle{
   font-weight:bold;
-  font-size:1.5em
+  font-size:1.5em;
+  border-color: black;
 }
 
+.menuOption{
+  border-color:black;
+  font-size:1.35em;
+  color:black
+}
 
 #gritty{
   display: inline;
@@ -46,6 +54,10 @@
   position: fixed;
   top:8%;
   right:1.5%;
+  background-color: #3385FF;
+  color: white;
+  border-width: thin;
+  border-color: black;
 
 }
 

@@ -69,23 +69,9 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     $rootScope.taskList.push(createTask("Garbage bags", new Date().getTime() + 1000 * 60 * 60 * 10, 5, 40, "45 gallon"));
     $rootScope.taskList.push(createTask("Return shirt", new Date().getTime() + 1000 * 60 * 60 * 10, 5, 40, "reciept for target"));
 
-
-    // updateListOrder($rootScope);
-    $scope.search_string = '';
-    $scope.searchList = [];
-
     $scope.shouldShowReorder = false;
 
-    $scope.doSearch = function(){
-        console.log('test');
-        $scope.searchList.length = 0; //reset list with each search
-        for (var i = 0; i < $rootScope.taskList.length; i++){
-            if ($rootScope.taskList[i].name.indexOf($scope.search_string) >= 0){
-                $scope.searchList.push($rootScope.taskList[i]);
-            }
-        }
-        console.log($scope.searchList.length);
-    }
+    // updateListOrder($rootScope);
 
     $scope.timePickerObject = {
         inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
@@ -180,6 +166,7 @@ angular.module('starter.controllers', ['ionic-timepicker'])
 
         if (isNewItem) {
             $rootScope.taskList.push($scope.taskData);
+            updateListOrder();
         }
 
         //reset data in add task form//
@@ -230,5 +217,23 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     };
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParms) {
+.controller('PlaylistCtrl', function($scope, $stateParams) {
+})
+
+.controller('SearchCtrl', function($scope, $rootScope, $stateParams){ 
+    $scope.search_string = "";
+    $scope.searchList = [];
+
+    console.log("startup");
+    $scope.doSearch = function(){
+        console.log($scope.search_string);
+        $scope.searchList.length = 0; //reset list with each search
+        for (var i = 0; i < $rootScope.taskList.length; i++){
+            if ($rootScope.taskList[i].name.indexOf($scope.search_string) >= 0){
+                $scope.searchList.push($rootScope.taskList[i]);
+                console.log($rootScope.taskList[i].name.indexOf($scope.search_string));
+            }
+        }
+        console.log($scope.searchList.length);
+    }
 });
