@@ -80,10 +80,11 @@ angular.module('starter.controllers', ['ionic-timepicker'])
         console.log('test');
         $scope.searchList.length = 0; //reset list with each search
         for (var i = 0; i < $rootScope.taskList.length; i++){
-            if ($rootScope.taskList[i].name.indexOf($scope.search_string) <= 0){
+            if ($rootScope.taskList[i].name.indexOf($scope.search_string) >= 0){
                 $scope.searchList.push($rootScope.taskList[i]);
             }
         }
+        console.log($scope.searchList.length);
     }
 
     $scope.timePickerObject = {
