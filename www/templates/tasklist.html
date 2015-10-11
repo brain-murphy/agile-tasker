@@ -10,7 +10,7 @@
         <ion-list show-reorder="shouldShowReorder">
 
                 <ion-item
-                     ng-repeat="task in taskList"
+                     ng-repeat="task in taskList "
                      class="item-accordion taskTitle"
                      item="task"
                      ng-click="onTaskClicked(task)"
@@ -26,8 +26,8 @@
                             </div>
                         </label>
                         <div class="detailBox">
-                            <label class="input-label"><strong>Time Remaining:</strong>
-                                {{task.work_rem}}
+                            <label class="input-label"><strong>Work Remaining:</strong>
+                                {{task.work_rem}} hours
                             </label>
                         </div>
                     </ion-item>
