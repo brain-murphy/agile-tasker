@@ -8,7 +8,7 @@
         <ion-list show-reorder="shouldShowReorder">
             <div ng-repeat="task in taskList">
                 <ion-item
-                     class="item-accordion"
+                     class="item-accordion taskTitle"
                      ng-click="onTaskClicked(task)"
                      ng-class="{active: task.isExpanded}">
                     <i class="icon" ng-class="task.isExpanded ? 'ion-minus' : 'ion-plus'"></i>
@@ -16,13 +16,13 @@
 
                     <ion-item class="item-accordion detailBox"
                         ng-show="task.isExpanded">
-                        <label class="input-label detailBox">Description:
+                        <label class="input-label detailBox taskDescript"><strong>Description:</strong>
                             <div class="detailBox">
                             {{task.desc}}
                         </div>
                         </label>
                         <div class="detailBox">
-                            <label class="input-label">Time Remaining:
+                            <label class="input-label"><strong>Time Remaining:</strong>
                                 {{task.work_rem}}
                             </label>
                         </div>
