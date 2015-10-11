@@ -1,9 +1,16 @@
 <ion-view view-title="Tasks">
-  <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="task in taskList" href="#/app/playlists/{{task.id}}">
-        {{task.name}}
-      </ion-item>
-    </ion-list>
-  </ion-content>
+    <ion-content>
+        <ion-list show-reorder="true">
+            <ion-item
+                ng-repeat="task in taskList"
+                ng-click="onTaskClicked({{task.id}})" >
+                {{task.name}}
+                <ion-body ng-show="task.isExpanded">
+                    {{task.description}}
+                </ion-body>
+                <ion-reorder-button class="ion-navicon" on-reorder="moveItem(task, $fromIndex, $toIndex)" />
+
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>

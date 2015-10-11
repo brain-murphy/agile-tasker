@@ -7,7 +7,7 @@
 var nextTaskId = 0;
 
 
-angular.module('starter', ['ionic', 'starter.controllers','ionic-timepicker'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ionic-timepicker'])
 
 
 .run(function($ionicPlatform) {
@@ -53,27 +53,27 @@ angular.module('starter', ['ionic', 'starter.controllers','ionic-timepicker'])
         }
       }
     })
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.tasklist', {
+      url: '/tasklist',
       views: {
         'menuContent': {
           templateUrl: 'templates/tasklist.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'TaskListCtrl'
         }
       }
     })
 
   .state('app.single', {
-    url: '/playlists/:playlistId',
+    url: '/viewtask/:taskId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/tasklist.html',
+        templateUrl: 'templates/viewtask.html',
         controller: 'PlaylistCtrl'
       }
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/tasklist');
 });
 
 function createTask(name, dueDate, workRem, importance, description) {
