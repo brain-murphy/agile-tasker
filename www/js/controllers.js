@@ -14,11 +14,7 @@ createTask = function (name, dueDate, workRem, importance, description) {
     };
 };
 
-<<<<<<< HEAD
-// This should make the time picker work
 
-
-=======
 updateListOrder = function ($rootScope) {
     console.log('updateListOrder');
     printTasks($rootScope);
@@ -28,7 +24,6 @@ updateListOrder = function ($rootScope) {
     });
     printTasks($rootScope);
 };
->>>>>>> a7dd653852116c0361ba44a828c287d66ea3c90b
 
 function printTasks  ($rootScope) {
     var string = '';
@@ -53,40 +48,8 @@ getRanking = function (due_date, work_rem, importance) {
 
 angular.module('starter.controllers', ['ionic-timepicker'])
 
-<<<<<<< HEAD
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
-  $scope.timePickerObject = {
-    inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
-    step: 15,  //Optional
-    format: 12,  //Optional
-    titleLabel: '12-hour Format',  //Optional
-    setLabel: 'Set',  //Optional
-    closeLabel: 'Close',  //Optional
-    setButtonType: 'button-positive',  //Optional
-    closeButtonType: 'button-stable',  //Optional
-    callback: function (val) {    //Mandatory
-      $scope.timePickerCallback(val);
-    }
-  };
-
-  $scope.timePickerCallback = function(val) {
-    if (typeof (val) === 'undefined') {
-      console.log('Time not selected');
-    } else {
-      var selectedTime = new Date(val * 1000);
-      console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
-    }
-  }
-
-    $scope.updateListOrder = function(){
-        for (var i = 0; i < $scope.taskList.length; i++){
-            $scope.taskList.sort(function(a, b){return b.ranking - a.ranking});
-        }
-    };
-=======
 .controller('AppCtrl', function($scope, $rootScope, $ionicModal, $timeout) {
->>>>>>> a7dd653852116c0361ba44a828c287d66ea3c90b
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
