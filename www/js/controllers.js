@@ -61,11 +61,12 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     //});
 
     $rootScope.taskList = [];
-    $rootScope.taskList.push(createTask("task1", "oct11", 15, 50, "sample_task"));
-    $rootScope.taskList.push(createTask("task2", "oct11", 10, 45, "samplasdfasdfasdf"));
-    $rootScope.taskList.push(createTask("task3", "oct11", 5, 40, "sample_tasasdffdasfsadfasdfk"));
 
-    updateListOrder($rootScope);
+    $rootScope.taskList.push(createTask("Study Physics", new Date().getTime() + 1000 * 60 * 60 * 24, 15, 50, "sample_task"));
+    $rootScope.taskList.push(createTask("Email Alyshia", new Date().getTime() + 1000 * 60 * 60 * 23, 10, 45, "samplasdfasdfasdf"));
+    $rootScope.taskList.push(createTask("ye old taske", new Date().getTime() + 1000 * 60 * 60 * 10, 5, 40, "sample_tasasdffdasfsadfasdfk"));
+
+    // updateListOrder($rootScope);
 
     $scope.timePickerObject = {
         inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
@@ -96,6 +97,12 @@ angular.module('starter.controllers', ['ionic-timepicker'])
 
     //task that models the data in the taskAddModal//
     $scope.taskData = createTask();
+    var now = new Date();
+    $scope.timeData = {
+        hour:now.getHours(),
+        minute:now.getMinutes(),
+        AMPM:now.getHours() > 12 ? "PM":"AM"
+    };
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/taskAddModal.html', {
@@ -146,34 +153,37 @@ angular.module('starter.controllers', ['ionic-timepicker'])
 .controller('TaskListCtrl', function($scope, $rootScope) {
 
     $scope.moveItem = function(item, fromIndex, toIndex) {
-        console.log('moveItem():before');
+        $rootScope.taskList.splice(fromIndex, 1);
+        $rootScope.taskList.splice(toIndex, 0, item);
 
-        printTasks($rootScope);
-        if (toIndex === 0) {
-            //move to the front of the list. make importance one more than the current max//
 
-            console.log('moveItem() to front:', $rootScope.taskList[fromIndex].importance);
-            $rootScope.taskList[fromIndex].importance = $rootScope.taskList[toIndex].importance + 1;
-        } else if (toIndex === $rootScope.taskList.length - 1) {
-            //move to the last place in the list. make importance one third of the current min//
-
-            console.log('moveItem() to back:', $rootScope.taskList[fromIndex].importance);
-            $rootScope.taskList[fromIndex].importance = $rootScope.taskList[toIndex].importance / 3 * 2;
-        } else {
-            //move in between two elements. make importance halfway between adjacent vals//
-
-            console.log('moveItem() inBetween:');
-            $rootScope.taskList[fromIndex].importance = ($rootScope.taskList[toIndex].importance +
-                    $rootScope.taskList[toIndex + 1].importance) / 2;
-        }
-
-        console.log('moveItem():after');
-        printTasks($rootScope);
-        //sort, now that values are updated//
-        updateListOrder($rootScope);
+        // printTasks($rootScope);
+        // if (toIndex === 0) {
+        //     //move to the front of the list. make importance one more than the current max//
+        //
+        //     console.log('moveItem() to front:', $rootScope.taskList[fromIndex].importance);
+        //     $rootScope.taskList[fromIndex].importance = $rootScope.taskList[toIndex].importance + 1;
+        // } else if (toIndex === $rootScope.taskList.length - 1) {
+        //     //move to the last place in the list. make importance one third of the current min//
+        //
+        //     console.log('moveItem() to back:', $rootScope.taskList[fromIndex].importance);
+        //     $rootScope.taskList[fromIndex].importance = $rootScope.taskList[toIndex].importance / 3 * 2;
+        // } else {
+        //     //move in between two elements. make importance halfway between adjacent vals//
+        //
+        //     console.log('moveItem() inBetween:');
+        //     $rootScope.taskList[fromIndex].importance = ($rootScope.taskList[toIndex].importance +
+        //             $rootScope.taskList[toIndex + 1].importance) / 2;
+        // }
+        //
+        // console.log('moveItem():after');
+        // printTasks($rootScope);
+        // //sort, now that values are updated//
+        // updateListOrder($rootScope);
     };
-    $scope.onTaskClicked = function (taskId) {
-        $rootScope.taskList[taskId].isExpanded = !$rootScope.taskList[taskId].isExpanded;
+    $scope.onTaskClicked = function (task) {
+        var taskIndex = $rootScope.taskList.indexOf(task);
+        $rootScope.taskList[taskIndex].isExpanded = !task.isExpanded;
     };
 })
 
