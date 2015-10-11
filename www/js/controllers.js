@@ -159,30 +159,33 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     });
 
     $scope.moveItem = function(item, fromIndex, toIndex) {
-        if (toIndex === 0) {
-            //move to the front of the list. make importance one more than the current max//
+        $rootScope.taskList.splice(fromIndex, 1);
+        $rootScope.taskList.splice(toIndex, 0, item);
 
-            console.log('moveItem() to front:', $rootScope.taskList[fromIndex].importance);
-            $rootScope.taskList[fromIndex].importance = importanceForRanking($rootScope.taskList[toIndex], getRanking($rootScope.taskList[toIndex])) + 1;
-        } else if (toIndex === $rootScope.taskList.length - 1) {
-            //move to the last place in the list. make importance one third of the current min//
-
-            console.log('moveItem() to back:', $rootScope.taskList[fromIndex].importance);
-            $rootScope.taskList[fromIndex].importance = importanceForRanking($rootScope.taskList[toIndex], getRanking($rootScope.taskList[toIndex])) / 3 * 2;
-        } else {
-            //move in between two elements. make importance halfway between adjacent vals//
-
-            console.log('moveItem() inBetween:');
-            $rootScope.taskList[fromIndex].importance = (importanceForRanking($rootScope.taskList[toIndex], getRanking($rootScope.taskList[toIndex])) +
-                    importanceForRanking($rootScope.taskList[toIndex + 1], getRanking($rootScope.taskList[toIndex + 1]))) / 2;
-        }
-
-
-        $rootScope.taskList.forEach(function (ele, i) {
-            console.log(ele.name, ele.importance);
-        });
-        //sort, now that values are updated//
-        updateListOrder($rootScope);
+        // if (toIndex === 0) {
+        //     //move to the front of the list. make importance one more than the current max//
+        //
+        //     console.log('moveItem() to front:', $rootScope.taskList[fromIndex].importance);
+        //     $rootScope.taskList[fromIndex].importance = importanceForRanking($rootScope.taskList[toIndex], getRanking($rootScope.taskList[toIndex])) + 1;
+        // } else if (toIndex === $rootScope.taskList.length - 1) {
+        //     //move to the last place in the list. make importance one third of the current min//
+        //
+        //     console.log('moveItem() to back:', $rootScope.taskList[fromIndex].importance);
+        //     $rootScope.taskList[fromIndex].importance = importanceForRanking($rootScope.taskList[toIndex], getRanking($rootScope.taskList[toIndex])) / 3 * 2;
+        // } else {
+        //     //move in between two elements. make importance halfway between adjacent vals//
+        //
+        //     console.log('moveItem() inBetween:');
+        //     $rootScope.taskList[fromIndex].importance = (importanceForRanking($rootScope.taskList[toIndex], getRanking($rootScope.taskList[toIndex])) +
+        //             importanceForRanking($rootScope.taskList[toIndex + 1], getRanking($rootScope.taskList[toIndex + 1]))) / 2;
+        // }
+        //
+        //
+        // $rootScope.taskList.forEach(function (ele, i) {
+        //     console.log(ele.name, ele.importance);
+        // });
+        // //sort, now that values are updated//
+        // updateListOrder($rootScope);
     };
     $scope.onTaskClicked = function (taskId) {
         $rootScope.taskList[taskId].isExpanded = !$rootScope.taskList[taskId].isExpanded;
