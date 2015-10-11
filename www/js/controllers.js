@@ -6,9 +6,9 @@ createTask = function (name, dueDate, workRem, importance, description) {
     return {
         id:nextTaskId++,
         name:name ? name : '',
-        due_date:dueDate ? dueDate : -1,
-        work_rem:workRem ? workRem : -1,
-        importance:importance ? importance : -1,
+        due_date:dueDate ? dueDate : new Date(),
+        work_rem:workRem ? workRem : 1,
+        importance:importance ? importance : 1,
         desc:description ? description : '',
         isExpanded:false
     };
@@ -78,7 +78,7 @@ angular.module('starter.controllers', ['ionic-timepicker'])
         console.log('test');
         searchList.length = 0; //reset list with each search
         for (var i = 0; i < taskList.length; i++){
-            
+
         }
     }
 
@@ -157,10 +157,11 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     // Perform the login action when the user submits the login form
     $scope.doTaskAdd = function() {
         var isNewItem = true,
-        millis = new Date(2015, 10, 12,
+        millis = new Date($scope.taskData.due_date.getYear(), $scope.taskData.due_date.getMonth(),
+            $scope.taskData.due_date.getDay(),
              $scope.timeData.hour + $scope.timeData.AMPM === 'PM' ? 12 : 0,
               $scope.timeData.minute, 0, 0).getTime();
-        $scope.taskData.due_date = millis;
+        $scope.taskData.due_date = millis ;
 
         console.log('adding task', $scope.taskData);
 
