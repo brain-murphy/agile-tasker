@@ -1,6 +1,19 @@
 var createTask,
     updateListOrder,
-    getRanking;
+    getRanking,
+    importanceForRanking;
+
+importanceForRanking = function (task, ranking) {
+    //work remainging also needs to be in milliseconds
+    var time_left = task.due_date - new Date().getTime();
+
+    if ((task.work_rem / time_left) >= 0.25){ //if the work remaining is 25% or more of the time left to complete task
+        return ((ranking / task.work_rem) * (time_left - task.work_rem)) / 100;
+    }
+    else {
+        return ((ranking / task.work_rem) * (time_left - task.work_rem));
+    }
+}
 
 createTask = function (name, dueDate, workRem, importance, description) {
     return {
@@ -15,13 +28,9 @@ createTask = function (name, dueDate, workRem, importance, description) {
 };
 
 updateListOrder = function ($rootScope) {
-    console.log('updateListOrder');
-    printTasks($rootScope);
-    console.log('updateListOrder():before', $rootScope.taskList);
     $rootScope.taskList.sort(function(a, b) {
-        return getRanking(a.due_date, a.work_rem, a.importance) - getRanking(b.due_date, b.work_rem, b.importance);
+        return getRanking(a) - getRanking(b);
     });
-    printTasks($rootScope);
 };
 
 function printTasks  ($rootScope) {
@@ -31,15 +40,16 @@ function printTasks  ($rootScope) {
     });
     console.log('updateListOrder():after', string);
 }
-getRanking = function (due_date, work_rem, importance) {
+
+getRanking = function (task) {
     //work remainging alsso needs to be in milliseconds
-    var current_date = (new Date()).getTime();
-    var ranking;
-    if ((work_rem / (current_date - due_date)) >= 0.25){ //if the work remaining is 25% or more of the time left to complete task
-        return ((current_date - due_date) / work_rem) * 100;
+    var time_left = task.due_date - new Date().getTime();
+
+    if ((task.work_rem / time_left) >= 0.25){ //if the work remaining is 25% or more of the time left to complete task
+        return ((task.importance * task.work_rem) / (time_left - task.work_rem)) * 100;
     }
     else {
-        return ((importance * work_rem) / (due_date - work_rem));
+        return ((task.importance * task.work_rem) / (time_left - task.work_rem));
     }
 };
 
@@ -57,9 +67,9 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     //});
 
     $rootScope.taskList = [];
-    $rootScope.taskList.push(createTask("task1", "oct11", 15, 50, "sample_task"));
-    $rootScope.taskList.push(createTask("task2", "oct11", 10, 45, "samplasdfasdfasdf"));
-    $rootScope.taskList.push(createTask("task3", "oct11", 5, 40, "sample_tasasdffdasfsadfasdfk"));
+    $rootScope.taskList.push(createTask("task1", new Date().getTime() + 1000 * 60 * 60 * 24, 15, 50, "sample_task"));
+    $rootScope.taskList.push(createTask("task2", new Date().getTime() + 1000 * 60 * 60 * 23, 10, 45, "samplasdfasdfasdf"));
+    $rootScope.taskList.push(createTask("task3", new Date().getTime() + 1000 * 60 * 60 * 10, 5, 40, "sample_tasasdffdasfsadfasdfk"));
 
     updateListOrder($rootScope);
 
@@ -141,30 +151,34 @@ angular.module('starter.controllers', ['ionic-timepicker'])
 
 .controller('TaskListCtrl', function($scope, $rootScope) {
 
-    $scope.moveItem = function(item, fromIndex, toIndex) {
-        console.log('moveItem():before');
 
-        printTasks($rootScope);
+    $rootScope.taskList.forEach(function (ele, i) {
+        console.log(ele.name, ele.importance);
+    });
+
+    $scope.moveItem = function(item, fromIndex, toIndex) {
         if (toIndex === 0) {
             //move to the front of the list. make importance one more than the current max//
 
             console.log('moveItem() to front:', $rootScope.taskList[fromIndex].importance);
-            $rootScope.taskList[fromIndex].importance = $rootScope.taskList[toIndex].importance + 1;
+            $rootScope.taskList[fromIndex].importance = importanceForRanking($rootScope.taskList[toIndex], getRanking($rootScope.taskList[toIndex])) + 1;
         } else if (toIndex === $rootScope.taskList.length - 1) {
             //move to the last place in the list. make importance one third of the current min//
 
             console.log('moveItem() to back:', $rootScope.taskList[fromIndex].importance);
-            $rootScope.taskList[fromIndex].importance = $rootScope.taskList[toIndex].importance / 3 * 2;
+            $rootScope.taskList[fromIndex].importance = importanceForRanking($rootScope.taskList[toIndex], getRanking($rootScope.taskList[toIndex])) / 3 * 2;
         } else {
             //move in between two elements. make importance halfway between adjacent vals//
 
             console.log('moveItem() inBetween:');
-            $rootScope.taskList[fromIndex].importance = ($rootScope.taskList[toIndex].importance +
-                    $rootScope.taskList[toIndex + 1].importance) / 2;
+            $rootScope.taskList[fromIndex].importance = (importanceForRanking($rootScope.taskList[toIndex], getRanking($rootScope.taskList[toIndex])) +
+                    importanceForRanking($rootScope.taskList[toIndex + 1], getRanking($rootScope.taskList[toIndex + 1]))) / 2;
         }
 
-        console.log('moveItem():after');
-        printTasks($rootScope);
+
+        $rootScope.taskList.forEach(function (ele, i) {
+            console.log(ele.name, ele.importance);
+        });
         //sort, now that values are updated//
         updateListOrder($rootScope);
     };
