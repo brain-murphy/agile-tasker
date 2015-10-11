@@ -74,6 +74,8 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     $scope.search_string = '';
     $scope.searchList = [];
 
+    $scope.shouldShowReorder = false;
+
     $scope.doSearch = function(){
         console.log('test');
         $scope.searchList.length = 0; //reset list with each search
@@ -185,7 +187,7 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     };
 
     $scope.reorderTaskList = function () {
-
+        $scope.shouldShowReorder = !$scope.shouldShowReorder;
     };
 })
 
