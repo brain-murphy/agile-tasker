@@ -16,9 +16,15 @@
 
                     <ion-item class="item-accordion"
                         ng-show="task.isExpanded">
-                        {{task.desc}}
+                        <label class="input-label">Description:
+                            <div>
+                            {{task.desc}}
+                        </div>
+                        </label>
                         <div>
-                           {{task.work_rem}}
+                            <label class="input-label">Time Remaining:
+                                {{task.work_rem}}
+                            </label>
                         </div>
                     </ion-item>
                     <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)">
