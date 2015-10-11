@@ -9,28 +9,28 @@
         <form ng-submit="doTaskAdd()">
             <div class="list">
                 <label class="item item-input">
-                    <span class="input-label"><strong>Title</strong></span>
+                    <span class="input-label"><strong>Title:</strong></span>
                     <input type="text" ng-model="taskData.name">
                 </label>
                 <label class="item item-input">
 
-                    <span class="input-label"><strong>Due Date</strong></span>
+                    <span class="input-label"><strong>Due Date:</strong></span>
                     <input type="date" ng-model="taskData.due_date">
                 </label>
                 <label class="item item-input">
 
                   <span class="input-label" id="gritty">
                       <div>
-                          <strong>Hour</strong> <select ng-model="timeData.hour" ng-options="hour for hour in timeData.hourOptions"></select>
-                          <strong>Minute</strong> <select ng-model="timeData.minute" ng-options="minute for minute in timeData.minuteOptions"></select>
-                          <strong>AM/PM</strong> <select ng-model="timeData.AMPM" ng-options="AMPM for AMPM in timeData.AMPMOptions"></select>
+                          <strong>Hour:</strong> <select ng-model="timeData.hour" ng-options="hour for hour in timeData.hourOptions"></select>
+                          <strong>Minute:</strong> <select ng-model="timeData.minute" ng-options="minute for minute in timeData.minuteOptions"></select>
+                          <strong>AM/PM:</strong> <select ng-model="timeData.AMPM" ng-options="AMPM for AMPM in timeData.AMPMOptions"></select>
                       </div>
 
                   </span>
 
                 </label>
                 <label class="item item-input">
-                  <span class="input-label"><strong>Time to Complete</strong> (Hours)</span>
+                  <span class="input-label"><strong>Time to Complete</strong> (Hours)<strong>:</strong></span>
                   <input type="text" ng-model="taskData.work_rem">
                 </label>
 
@@ -43,7 +43,7 @@
                 </label>
                 <label>
                     <label class="item item-input">
-                        <span class="input-label"><strong>Description</strong> (Optional)</span>
+                        <span class="input-label"><strong>Description</strong> (Optional)<strong>:</strong></span>
                         <input type="text" ng-model="taskData.desc">
                     </label>
                     <label class="item">

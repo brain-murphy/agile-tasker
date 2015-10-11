@@ -134,6 +134,8 @@ angular.module('starter.controllers', ['ionic-timepicker'])
         $scope.taskAddModal = modal;
     });
 
+
+
     // Triggered in the login modal to close it
     $scope.closeTaskAddModal = function() {
         $scope.taskAddModal.hide();
@@ -182,6 +184,7 @@ angular.module('starter.controllers', ['ionic-timepicker'])
 
 .controller('TaskListCtrl', function($scope, $rootScope) {
 
+
     $scope.moveItem = function(item, fromIndex, toIndex) {
         $rootScope.taskList.splice(fromIndex, 1);
         $rootScope.taskList.splice(toIndex, 0, item);
@@ -220,7 +223,7 @@ angular.module('starter.controllers', ['ionic-timepicker'])
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
-.controller('SearchCtrl', function($scope, $rootScope, $stateParams){ 
+.controller('SearchCtrl', function($scope, $rootScope, $stateParams){
     $scope.search_string = "";
     $scope.searchList = [];
 
