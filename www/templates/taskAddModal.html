@@ -18,7 +18,7 @@
 
                 </label>
                 <label>
-                  <span class ="input-label">Time <select><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></span>
+                  <span class ="input-label">Time <select ng-model="taskdata.hour"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></span>
                 </label>
 
 
@@ -31,7 +31,7 @@
                 <label>
                     <label class="item item-input">
                         <span class="input-label">Description (Optional)</span>
-                        <input type="text" ng-mogel="taskData.description">
+                        <input type="text" ng-model="taskData.description">
                     </label>
                     <label class="item">
                         <button class="button button-block button-positive" type="submit">Add Task</button>
