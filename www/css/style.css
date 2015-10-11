@@ -22,6 +22,14 @@
   display: block !important;
 }
 
+#gritty{
+  display: inline;
+}
+
+#grittyOutside{
+  display: inline;
+}
+
 .circle {
   position: relative;
   display: block;
