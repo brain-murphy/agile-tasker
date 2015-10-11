@@ -17,30 +17,29 @@
                     <input type="date" ng-model="taskData.dueDate">
 
                 </label>
-
                 <label>
                     <ionic-timepicker input-obj="timePickerObject">
-                        <span class="input-label">Add Time (Optional)</span>
-                        <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+                        <button class="button button-block button-positive overflowShow">
+                            <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+                        </button>
                     </ionic-timepicker>
-                </span>
-            </label>
+                </label>
 
-            <label>
-                <div class="item range">
-                    Importance
-                    <input type="range" name="volume" ng-model="taskData.importance">
+                <label>
+                    <div class="item range">
+                        Importance
+                        <input type="range" name="volume" ng-model="taskData.importance">
+                    </div>
+                </label>
+                <label>
+                    <label class=item "item item input">
+                        <span class="input-label">Description (Optional)</span>
+                        <input type="text" ng-mogel="taskData.description">
+                    </label>
+                    <label class="item">
+                        <button class="button button-block button-positive" type="submit">Add Task</button>
+                    </label>
                 </div>
-            </label>
-            <label>
-                <label class=item "item item input">
-                    <span class="input-label">Description (Optional)</span>
-                    <input type="text" ng-mogel="taskData.description">
-                </label>
-                <label class="item">
-                    <button class="button button-block button-positive" type="submit">Add Task</button>
-                </label>
-            </div>
-        </form>
-    </ion-content>
-</ion-modal-view>
+            </form>
+        </ion-content>
+    </ion-modal-view>
