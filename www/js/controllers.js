@@ -10,6 +10,9 @@ var createTask = function(name, dueDate, workRem, importance, description) {
     };
 }
 
+// This should make the time picker work
+
+
 
 var getRanking = function(due_date, work_rem, importance){
     //work remainging alsso needs to be in milliseconds
@@ -28,6 +31,29 @@ var getRanking = function(due_date, work_rem, importance){
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+
+  $scope.timePickerObject = {
+    inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
+    step: 15,  //Optional
+    format: 12,  //Optional
+    titleLabel: '12-hour Format',  //Optional
+    setLabel: 'Set',  //Optional
+    closeLabel: 'Close',  //Optional
+    setButtonType: 'button-positive',  //Optional
+    closeButtonType: 'button-stable',  //Optional
+    callback: function (val) {    //Mandatory
+      $scope.timePickerCallback(val);
+    }
+  };
+
+  $scope.timePickerCallback = function(val) {
+    if (typeof (val) === 'undefined') {
+      console.log('Time not selected');
+    } else {
+      var selectedTime = new Date(val * 1000);
+      console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
+    }
+  }
 
     $scope.updateListOrder = function(){
         for (var i = 0; i < $scope.taskList.length; i++){
