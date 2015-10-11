@@ -99,8 +99,8 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     $scope.taskData = createTask();
     var now = new Date();
     $scope.timeData = {
-        hour:now.getHours(),
-        minute:now.getMinutes(),
+        hour:toString(now.getHours()),
+        minute:toString(now.getMinutes()),
         AMPM:now.getHours() > 12 ? "PM":"AM"
     };
 
