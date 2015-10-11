@@ -16,11 +16,22 @@
 }
 .item-accordion.ng-hide {
   line-height: 0px;
+  transition: 0.04s all linear;
 }
 .item-accordion.ng-hide-add,
 .item-accordion.ng-hide-remove {
   display: block !important;
 }
+
+.detailBox{
+  background-color: #D9D9D9
+}
+
+.taskTitle{
+  font-weight:bold;
+  font-size:1.5em
+}
+
 
 #gritty{
   display: inline;
