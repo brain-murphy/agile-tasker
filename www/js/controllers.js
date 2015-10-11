@@ -62,9 +62,13 @@ angular.module('starter.controllers', ['ionic-timepicker'])
 
     $rootScope.taskList = [];
 
-    $rootScope.taskList.push(createTask("Study Physics", new Date().getTime() + 1000 * 60 * 60 * 24, 15, 50, "sample_task"));
-    $rootScope.taskList.push(createTask("Email Alyshia", new Date().getTime() + 1000 * 60 * 60 * 23, 10, 45, "samplasdfasdfasdf"));
-    $rootScope.taskList.push(createTask("ye old taske", new Date().getTime() + 1000 * 60 * 60 * 10, 5, 40, "sample_tasasdffdasfsadfasdfk"));
+    $rootScope.taskList.push(createTask("Email Alyshia", new Date().getTime() + 1000 * 60 * 60 * 23, 10, 45, "Tech talk registration for club meeting"));
+    $rootScope.taskList.push(createTask("Study Physics", new Date().getTime() + 1000 * 60 * 60 * 24, 15, 50, "Chapters 16, 17, and 18"));
+    $rootScope.taskList.push(createTask("Finish Ticket 44220", new Date().getTime() + 1000 * 60 * 60 * 10, 5, 40, "testing needed on IE8"));
+    $rootScope.taskList.push(createTask("Ask about holiday PTO", new Date().getTime() + 1000 * 60 * 60 * 10, 5, 40, "see if we get that date off"));
+    $rootScope.taskList.push(createTask("Garbage bags", new Date().getTime() + 1000 * 60 * 60 * 10, 5, 40, "45 gallon"));
+    $rootScope.taskList.push(createTask("Return shirt", new Date().getTime() + 1000 * 60 * 60 * 10, 5, 40, "reciept for target"));
+
 
     // updateListOrder($rootScope);
     $scope.search_string = '';
@@ -110,8 +114,26 @@ angular.module('starter.controllers', ['ionic-timepicker'])
     var now = new Date();
     $scope.timeData = {
         hour:toString(now.getHours()),
+        hourOptions : function () {
+            var hours = [],
+            hour = 1;
+            while (hour < 13) {
+                hours.push(hour++);
+            }
+            return hours;
+        }(),
         minute:toString(now.getMinutes()),
-        AMPM:now.getHours() > 12 ? "PM":"AM"
+        minuteOptions: function () {
+            var minutes = [],
+            minute = 0;
+            while (minute < 46) {
+                minutes.push(minute);
+                minute += 15;
+            }
+            return minutes;
+        }(),
+        AMPM:now.getHours() > 12 ? "PM":"AM",
+        AMPMOptions:['AM', 'PM']
     };
 
     // Create the login modal that we will use later
@@ -134,7 +156,12 @@ angular.module('starter.controllers', ['ionic-timepicker'])
 
     // Perform the login action when the user submits the login form
     $scope.doTaskAdd = function() {
-        var isNewItem = true;
+        var isNewItem = true,
+        millis = new Date(2015, 10, 12,
+             $scope.timeData.hour + $scope.timeData.AMPM === 'PM' ? 12 : 0,
+              $scope.timeData.minute, 0, 0).getTime();
+        $scope.taskData.due_date = millis;
+
         console.log('adding task', $scope.taskData);
 
         //add task data to task list//
