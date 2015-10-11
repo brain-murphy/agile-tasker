@@ -27,7 +27,6 @@ createTask = function (name, dueDate, workRem, importance, description) {
     };
 };
 
-
 updateListOrder = function ($rootScope) {
     $rootScope.taskList.sort(function(a, b) {
         return getRanking(a) - getRanking(b);
@@ -57,7 +56,6 @@ getRanking = function (task) {
 
 
 angular.module('starter.controllers', ['ionic-timepicker'])
-
 
 .controller('AppCtrl', function($scope, $rootScope, $ionicModal, $timeout) {
 
@@ -187,10 +185,24 @@ angular.module('starter.controllers', ['ionic-timepicker'])
         // //sort, now that values are updated//
         // updateListOrder($rootScope);
     };
+
+    $scope.toggleGroup = function(id) {
+        if ($scope.isGroupShown(id)) {
+            $scope.shownGroup = null;
+        } else {
+            $scope.shownGroup = id;
+        }
+    };
+
+    $scope.isGroupShown = function(id) {
+        return $scope.shownGroup === id;
+    };
     $scope.onTaskClicked = function (taskId) {
+        console.log('test');
         $rootScope.taskList[taskId].isExpanded = !$rootScope.taskList[taskId].isExpanded;
     };
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+    console.log('asdfaew');
 });
