@@ -12,6 +12,7 @@
     -webkit-animation: fadeInLeft 1s;
     animation: fadeInLeft 1s;
 }
+
 .circle {
   position: relative;
   display: block;
