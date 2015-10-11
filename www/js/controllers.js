@@ -7,7 +7,7 @@ createTask = function (name, dueDate, workRem, importance, description) {
         id:nextTaskId++,
         name:name ? name : '',
         due_date:dueDate ? dueDate : -1,
-        work_rem:workRem ? workRem : -1,
+        work_rem:workRem ? workRem : '',
         importance:importance ? importance : -1,
         desc:description ? description : '',
         isExpanded:false
