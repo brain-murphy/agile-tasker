@@ -14,14 +14,14 @@
                     <i class="icon" ng-class="task.isExpanded ? 'ion-minus' : 'ion-plus'"></i>
                     {{task.name}}
 
-                    <ion-item class="item-accordion"
+                    <ion-item class="item-accordion detailBox"
                         ng-show="task.isExpanded">
-                        <label class="input-label">Description:
-                            <div>
+                        <label class="input-label detailBox">Description:
+                            <div class="detailBox">
                             {{task.desc}}
                         </div>
                         </label>
-                        <div>
+                        <div class="detailBox">
                             <label class="input-label">Time Remaining:
                                 {{task.work_rem}}
                             </label>
