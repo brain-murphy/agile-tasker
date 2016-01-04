@@ -1,0 +1,39 @@
+<ion-view title="View Task">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <h1>Title</h1>
+        <form class="list">
+            <label class="item item-select" name="workRemainingSelect">
+                <span class="input-label">Hours of Work Remaining</span>
+                <select>
+                    <option>3</option>
+                    <option>2</option>
+                    <option>1</option>
+                    <option>Done!</option>
+                </select>
+            </label>
+        </form>
+        <div>
+            <p>description
+                <strong>markdown</strong>lorem ipsum dolor sit amet.</p>
+        </div>
+        <div class="list card">
+            <div class="item item-divider">Due</div>
+            <div class="item item-body">
+                <div>
+                    <p>insert calendar/timepicker here</p>
+                </div>
+            </div>
+        </div>
+        <div class="list card">
+            <div class="item item-divider">Notes</div>
+            <div class="item item-body">
+                <form class="list">
+                    <ion-checkbox>do this, do that</ion-checkbox>
+                    <ion-checkbox>do this, do that</ion-checkbox>
+                    <button class="button button-calm button-block ">Add a Note</button>
+                </form>
+            </div>
+        </div>
+        <button class="button button-assertive button-block button-small">Delete Task</button>
+    </ion-content>
+</ion-view>
