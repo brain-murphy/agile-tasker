@@ -1,8 +1,8 @@
 angular.module('app.controllers', [])
      
-.controller('prioritiesCtrl', function($scope) {
+// .controller('prioritiesCtrl', function($scope) {
 
-})
+// })
    
 .controller('viewTaskCtrl', function($scope) {
 
@@ -14,5 +14,5 @@ angular.module('app.controllers', [])
    
 .controller('addATaskCtrl', function($scope) {
 
-})
+});
  
