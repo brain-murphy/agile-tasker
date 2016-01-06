@@ -1,4 +1,4 @@
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['app.controllers.priorities'])
      
 // .controller('prioritiesCtrl', function($scope) {
 
