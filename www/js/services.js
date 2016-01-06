@@ -35,7 +35,7 @@ var MOCK_TASKS = {
 	}
 };
 
-servicesModule.factory('MockDataService', [function () {
+servicesModule.factory('MockData', [function () {
 	var createMockDataSnapshotForTask = function (key) {
 		return {
 			key: function () { return key; },
@@ -43,10 +43,12 @@ servicesModule.factory('MockDataService', [function () {
 		}
 	}
 	
-	var mockDataService = function (eventName, callback) {
-		for (var key in MOCK_TASKS) {
-			if (MOCK_TASKS.hasOwnProperty(key)) {
-				callback(createMockDataSnapshotForTask(key));
+	var mockDataService = {
+		on: function (eventName, callback) {
+			for (var key in MOCK_TASKS) {
+				if (MOCK_TASKS.hasOwnProperty(key)) {
+					callback(createMockDataSnapshotForTask(key));
+				}
 			}
 		}
 	};
