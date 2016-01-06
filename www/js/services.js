@@ -36,7 +36,22 @@ var MOCK_TASKS = {
 };
 
 servicesModule.factory('MockDataService', [function () {
+	var createMockDataSnapshotForTask = function (key) {
+		return {
+			key: function () { return key; },
+			val: function () { return MOCK_TASKS[key]; }
+		}
+	}
 	
+	var mockDataService = function (eventName, callback) {
+		for (var key in MOCK_TASKS) {
+			if (MOCK_TASKS.hasOwnProperty(key)) {
+				callback(createMockDataSnapshotForTask(key));
+			}
+		}
+	};
+	
+	return mockDataService;
 }])
 
 .factory('CalculatePriority', [function () {
