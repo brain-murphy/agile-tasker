@@ -32,20 +32,28 @@ angular.module('app.routes', [])
     
       
         
-    .state('viewTask', {
-      url: '/viewTask',
-      templateUrl: 'templates/viewTask.html',
-      controller: 'viewTaskCtrl'
+    .state('menu.viewTask', {
+      url: '/priorities/:chatId',
+      views: {
+          'side-menu21': {
+            templateUrl: 'templates/viewTask.html',
+            controller: 'viewTaskCtrl'
+          }
+      }
     })
         
       
     
       
         
-    .state('editTask', {
-      url: '/editTask',
-      templateUrl: 'templates/editTask.html',
-      controller: 'editTaskCtrl'
+    .state('menu.editTask', {
+      url: '/addTask/:chatId',
+      views: {
+          'side-menu21': {
+            templateUrl: 'templates/editTask.html',
+            controller: 'editTaskCtrl'
+          }
+      }
     })
         
       
@@ -66,6 +74,6 @@ angular.module('app.routes', [])
     ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/side-menu21');
+  $urlRouterProvider.otherwise('/side-menu21/priorities');
 
 });
