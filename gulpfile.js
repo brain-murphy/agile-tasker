@@ -1,3 +1,4 @@
+/* global process */
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var bower = require('bower');
@@ -49,3 +50,7 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
+
+gulp.task('test', function (done) {
+    sh.exec('karma start unit-tests/unit-tests.conf.js');
+})
