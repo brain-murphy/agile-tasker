@@ -53,7 +53,8 @@ angular.module('app.services', ['firebase'])
         
         function signInLocally() {
             return getLocalLoginCredentials()
-                .then(auth.$authWithPassword);
+                .then(auth.$authWithPassword)
+                .then(pushUserDataIfNecessary);
         }
         
         function hasSignedInLocally() {
@@ -93,7 +94,7 @@ angular.module('app.services', ['firebase'])
                 
             for (var i = 0; i < 10; i++) {
                 randomIndex = Math.floor(Math.random() * alphabet.length);
-                randomString[i] = alphabet[randomIndex];
+                randomString += alphabet[randomIndex];
             }
             
             return randomString;
@@ -105,6 +106,49 @@ angular.module('app.services', ['firebase'])
             localStorage.password = newLoginCredentials.password;
             
             return auth.$createUser(newLoginCredentials);
+        }
+        
+        function pushUserDataIfNecessary(authData) {
+            var userRef = RootFirebaseRef
+                .child('users')
+                .child(authData.uid);
+                
+            var authDataInserter = InsertThis(authData);
+                
+            return checkIfExists(userRef)
+                .then(null, pushUserData)
+                .then(authDataInserter);
+        }
+        
+        function pushUserData(newUserRef) {
+            return $q(function (resolve, reject) {
+                newUserRef.set({name: 'testuserinfo'}, function (err) {
+                    if (err) {
+                        reject();
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+        }
+        
+        function InsertThis(val) {
+            return function () {
+                return val;
+            } 
+        }
+        
+        
+        function checkIfExists(firebaseRef) {
+            return $q(function (resolve, reject) {
+                firebaseRef.once('value', function (snapshot) {
+                    if (snapshot.val()) {
+                        resolve();
+                    } else {
+                        reject(firebaseRef);
+                    }
+                });
+            });
         }
         
         return {
@@ -119,10 +163,9 @@ angular.module('app.services', ['firebase'])
 .factory('FirebaseUid', ['FirebaseSignIn', 'DEFAULT_AUTH_METHOD',
     function (FirebaseSignIn, DEFAULT_AUTH_METHOD) {
          
-        return function getUid() {
+        return function () {
             return FirebaseSignIn[DEFAULT_AUTH_METHOD]()
                 .then(function (authData) {
-                    console.log(authData.uid);
                     return authData.uid;
                 });
         }

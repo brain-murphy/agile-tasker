@@ -1,4 +1,4 @@
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['app.services'])
      
 .controller('prioritiesCtrl', [
     function($scope) {
@@ -9,9 +9,10 @@ angular.module('app.controllers', [])
 
 })
    
-.controller('editTaskCtrl', ['$ionicHistory', '$scope',
-    function($ionicHistory, $scope) {
-        console.log('viewHistory', $ionicHistory.viewHistory());
+.controller('editTaskCtrl', ['$ionicHistory', '$scope', 'FirebaseUid',
+    function($ionicHistory, $scope, FirebaseUid) {
+        console.log(FirebaseUid);
+        FirebaseUid().then(console.log.bind(console), console.log.bind(console));
     }
 ])
    
