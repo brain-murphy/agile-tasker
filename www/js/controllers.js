@@ -12,7 +12,7 @@ angular.module('app.controllers', ['app.services'])
 .controller('editTaskCtrl', ['$ionicHistory', '$scope', 'FirebaseUid',
     function($ionicHistory, $scope, FirebaseUid) {
         console.log(FirebaseUid);
-        FirebaseUid().then(console.log.bind(console), console.log.bind(console));
+        FirebaseUid.then(console.log.bind(console), console.log.bind(console));
     }
 ])
    
