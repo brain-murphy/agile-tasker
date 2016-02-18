@@ -17,13 +17,13 @@ angular.module('app.services', ['firebase'])
         return NotImplementedException;
 })
 
-.factory('RootFirebaseRef', ['FIREBASE_URL', function (FIREBASE_URL) {
+.factory('RootFirebase', ['FIREBASE_URL', function (FIREBASE_URL) {
     return new Firebase(FIREBASE_URL);
 }])
 
-.factory('FirebaseSignIn', ['$firebaseAuth', 'NotImplementedException', 'RootFirebaseRef', '$q',
-    function ($firebaseAuth, NotImplementedException, RootFirebaseRef, $q) {
-        var auth = $firebaseAuth(RootFirebaseRef),
+.factory('FirebaseSignIn', ['$firebaseAuth', 'NotImplementedException', 'RootFirebase', '$q',
+    function ($firebaseAuth, NotImplementedException, RootFirebase, $q) {
+        var auth = $firebaseAuth(RootFirebase),
             currentSignOnMethod;
         
         function signInWithFacebook() {
@@ -109,7 +109,7 @@ angular.module('app.services', ['firebase'])
         }
         
         function pushUserDataIfNecessary(authData) {
-            var userRef = RootFirebaseRef
+            var userRef = RootFirebase
                 .child('users')
                 .child(authData.uid);
                 
@@ -162,14 +162,92 @@ angular.module('app.services', ['firebase'])
 
 .factory('FirebaseUid', ['FirebaseSignIn', 'DEFAULT_AUTH_METHOD',
     function (FirebaseSignIn, DEFAULT_AUTH_METHOD) {
-         
-        return function () {
-            return FirebaseSignIn[DEFAULT_AUTH_METHOD]()
-                .then(function (authData) {
-                    return authData.uid;
+        return FirebaseSignIn[DEFAULT_AUTH_METHOD]()
+            .then(function (authData) {
+                return authData.uid;
+            });
+    }
+])
+
+.factory('UserTasksFirebase', ['FirebaseUid', 'RootFirebase',
+    function (FirebaseUid, RootFirebase) {
+        return FirebaseUid
+            .then(function (uid) {
+               return RootFirebase
+                .child('tasks')
+                .child(uid); 
+            });
+    }
+])
+
+.factory('TaskFirebaseQuery', ['UserTasksFirebase',
+    function (UserTasksFirebase) {
+        
+        function queryActiveTasks() {
+            return UserTasksFirebase
+                .then(function (tasksRef) {
+                    return tasksRef
+                        .orderByChild('active')
+                        .equalTo(true);
                 });
         }
         
+        function queryByTaskName(taskName) {
+            return UserTasksFirebase
+                .then(function (tasksRef) {
+                    return tasksRef
+                        .orderByChild('title')
+                        .startAt(taskName)
+                        .limitToFirst(10);
+                });
+        }
+        
+        /*
+            returns a promise that resolves to the 
+            results queried from
+            the active user's firebase tasks
+        */
+        return {
+            getActiveTasks: queryActiveTasks,
+            searchByName: queryByTaskName,
+        }
+    }
+])
+
+.factory('GetTask', ['UserTasksFirebase', '$firebaseObject',
+    function (UserTasksFirebase, $firebaseObject) {
+        
+        function getTaskRef(taskUid) {
+            return UserTasksFirebase
+                .then(function (tasksRef) {
+                    return tasksRef
+                        .child(taskUid);
+                });
+        }
+        
+        return function (taskUid) {
+            getTaskRef(taskUid)
+                .then(function (taskRef) {
+                    return $firebaseObject(taskRef);
+                })
+        }
+    }
+])
+
+.factory('ActiveTasks', ['TaskFirebaseQuery', '$firebaseArray',
+    function (TaskFirebaseQuery, $firebaseArray) {
+        return TaskFirebaseQuery.queryActiveTasks()
+            .then(function (query) {
+                return $firebaseArray(query);
+            })
+    }
+])
+
+.factory('SearchTasksByTitle', ['TaskFirebaseQuery', '$firebaseArray',
+    function (TaskFirebaseQuery, $firebaseArray) {
+        return TaskFirebaseQuery.searchByName()
+            .then(function (query) {
+                return $firebaseArray(query);
+            })
     }
 ]);
-
